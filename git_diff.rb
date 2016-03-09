@@ -8,6 +8,7 @@ JENKINS_URL = ARGV[0]
 JOB_NAME = ARGV[1]
 BUILD_ID = ARGV[2]
 MASTER_DIRECTORY = ARGV[3]
+#Need to allow Monitoring_directory to take array of directories
 MONITORING_DIRECTORY = ARGV[4]
 
 #mocks
