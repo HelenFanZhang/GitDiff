@@ -23,7 +23,8 @@ MONITORING_DIRECTORY = ARGV[4]
 
 jenkins_generic_info_json_url = JENKINS_URL + 'job/' + JOB_NAME + '/api/json?'
 jenkins_generic_info_json = JSON.parse(Unirest.get(jenkins_generic_info_json_url).raw_body)
-last_known_good_build_url = jenkins_generic_info_json['lastSuccessfulBuild']['url'] + '/api/json?'
+last_known_good_build_url = jenkins_generic_info_json['lastSuccessfulBuild']['url'] + 'api/json?'
+x = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)
 last_known_good_sha = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)['actions'][1]['lastBuiltRevision']['SHA1']
 current_sha = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)['actions'][1]['lastBuiltRevision']['SHA1']
 
