@@ -62,7 +62,9 @@ for git_diff in git_diffs
   end
 end
 
-if !offending_files.empty?
+if offending_files.empty?
+  git.add_tag('REGION_APPROVED')
+elsif
   logger.error("Regions Bank Maybe affected by the differences above")
   exit(1)
 end
