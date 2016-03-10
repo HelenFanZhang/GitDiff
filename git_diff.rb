@@ -28,6 +28,10 @@ g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
 puts "last_known_good_sha " + last_known_good_sha
 puts "current_sha " + current_sha
 
+
+
+last_known_good_sha = '88b039d24d177f353c81b79725c1f2ed8ffd8730'
+current_sha = '2cc7005f5bf0735010c055218923e427ea22d13c'
 git_diffs = g.diff(last_known_good_sha, current_sha)
 
 
@@ -37,7 +41,7 @@ start_string = "--- a/"
 end_string = "\n"
 
 for git_diff in git_diffs
-  if git_diff.patch[/#{start_string}(.*?)#{end_string}/m, 1].include? MONITORING_DIRECTORY
+  if git_diff.patch.include? MONITORING_DIRECTORY
     exit(1)
   end
 end
