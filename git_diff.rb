@@ -30,6 +30,10 @@ current_sha = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)['actio
 
 g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
 
+
+puts "last_known_good_sha " + last_known_good_sha
+puts "current_sha" + current_sha
+
 git_diffs = g.diff(last_known_good_sha, current_sha)
 
 start_string = "--- a/"
