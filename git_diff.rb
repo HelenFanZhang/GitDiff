@@ -63,7 +63,7 @@ for git_diff in git_diffs
 end
 
 if offending_files.empty?
-  git.add_tag('REGION_APPROVED')
+  g.add_tag('REGION_APPROVED')
 elsif
   logger.error("Regions Bank Maybe affected by the differences above")
   exit(1)
