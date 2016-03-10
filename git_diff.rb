@@ -26,13 +26,16 @@ jenkins_generic_info_json = JSON.parse(Unirest.get(jenkins_generic_info_json_url
 last_known_good_build_url = jenkins_generic_info_json['lastSuccessfulBuild']['url'] + 'api/json?'
 x = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)
 last_known_good_sha = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)['actions'][3]['lastBuiltRevision']['SHA1']
+
+current_build_url = JENKINS_URL + 'job/' + JOB_NAME + '/' + BUILD_ID + '/api/json?'
+
 current_sha = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)['actions'][3]['lastBuiltRevision']['SHA1']
 
 g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
 
 
 puts "last_known_good_sha " + last_known_good_sha
-puts "current_sha" + current_sha
+puts "current_sha " + current_sha
 
 git_diffs = g.diff(last_known_good_sha, current_sha)
 

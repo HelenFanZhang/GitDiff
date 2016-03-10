@@ -17,7 +17,7 @@
         </COVERAGE_PATTERN>
       </EXTENSION>
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/git_diff.rb" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="http://localhost:8080/ Test 32 ../avant-basic /app" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="http://localhost:8080/ Test 36 ../avant-basic /app" />
       <method />
     </configuration>
     <configuration default="false" name="git_diff" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
