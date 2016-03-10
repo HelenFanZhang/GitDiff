@@ -64,6 +64,7 @@ end
 
 if !offending_files.empty?
   logger.error("Regions Bank Maybe affected by the differences above")
+  exit(1)
 end
 
 
