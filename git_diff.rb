@@ -28,10 +28,6 @@ g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
 puts "last_known_good_sha " + last_known_good_sha
 puts "current_sha " + current_sha
 
-
-
-last_known_good_sha = '88b039d24d177f353c81b79725c1f2ed8ffd8730'
-current_sha = '2cc7005f5bf0735010c055218923e427ea22d13c'
 git_diffs = g.diff(last_known_good_sha, current_sha)
 
 
