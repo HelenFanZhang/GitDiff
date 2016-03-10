@@ -38,8 +38,8 @@ current_sha = find_git_commit(current_build_info_json)
 g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
 
 #TODO: raise error when any one of the SHA doesn't exist
-puts "last_known_good_sha " + last_known_good_sha
-puts "current_sha " + current_sha
+puts last_known_good_sha
+puts current_sha
 
 git_diffs = g.diff(last_known_good_sha, current_sha)
 
