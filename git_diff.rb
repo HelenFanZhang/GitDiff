@@ -30,6 +30,9 @@ puts "current_sha " + current_sha
 
 git_diffs = g.diff(last_known_good_sha, current_sha)
 
+
+puts git_diffs
+
 start_string = "--- a/"
 end_string = "\n"
 
