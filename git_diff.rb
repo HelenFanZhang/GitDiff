@@ -25,14 +25,24 @@ def find_git_commit(build_info_json)
   nil
 end
 
-jenkins_generic_info_json_url = JENKINS_URL + 'job/' + JOB_NAME + '/api/json?'
-jenkins_generic_info_json = JSON.parse(Unirest.get(jenkins_generic_info_json_url).raw_body)
-last_known_good_build_url = jenkins_generic_info_json['lastSuccessfulBuild']['url'] + 'api/json?'
-last_known_good_info_json = JSON.parse(Unirest.get(last_known_good_build_url).raw_body)
+def get_build_info(build_id)
+  current_build_url = JENKINS_URL + 'job/' + JOB_NAME + '/' + build_id.to_s + '/api/json?'
+  rest_get(current_build_url)
+end
+
+def rest_get(url)
+  JSON.parse(Unirest.get(url).raw_body)
+end
+
+def get_jenkins_generic_info
+  jenkins_generic_info_url = JENKINS_URL + 'job/' + JOB_NAME + '/api/json?'
+  rest_get(jenkins_generic_info_url)
+end
+
+last_known_good_info_json = get_build_info(get_jenkins_generic_info['lastSuccessfulBuild']['number'])
 last_known_good_sha = find_git_commit(last_known_good_info_json)
 
-current_build_url = JENKINS_URL + 'job/' + JOB_NAME + '/' + BUILD_ID + '/api/json?'
-current_build_info_json = JSON.parse(Unirest.get(current_build_url).raw_body)
+current_build_info_json = get_build_info(BUILD_ID)
 current_sha = find_git_commit(current_build_info_json)
 
 g = Git.open(MASTER_DIRECTORY, :log => Logger.new(STDOUT))
@@ -46,9 +56,6 @@ git_diffs = g.diff(last_known_good_sha, current_sha)
 
 
 puts git_diffs
-
-start_string = "--- a/"
-end_string = "\n"
 
 for git_diff in git_diffs
   if git_diff.patch.include? MONITORING_DIRECTORY
