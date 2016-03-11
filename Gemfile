@@ -1,6 +1,4 @@
 gem 'git'
-gem 'unirest'
-
 
 
 

@@ -1,8 +1,6 @@
 require 'rubygems'
 require 'git'
 require 'Logger'
-require 'json'
-require 'unirest'
 
 MASTER_DIRECTORY = ARGV[0]
 #TODO: Need to allow Monitoring_directory to take array of directories
