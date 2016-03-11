@@ -7,7 +7,7 @@ require 'unirest'
 MASTER_DIRECTORY = ARGV[0]
 #TODO: Need to allow Monitoring_directory to take array of directories
 MONITORING_DIRECTORY = ARGV[1]
-@monitoring_tag = "REGIONS_APPROVAL"
+@monitoring_tag = ARGV[2]
 
 def get_last_known_good_commit_hash
   x = @g.tags
@@ -32,7 +32,8 @@ logger = Logger.new(STDOUT)
 current_sha = @g.log.first.objectish
 last_known_good_sha = get_last_known_good_commit_hash
 
-raise("changelist is not suppose to be null") if current_sha.nil? || last_known_good_sha.nil?
+raise("current changelist is not suppose to be null") if current_sha.nil?
+raise("last known good commit cannot be null") if last_known_good_sha.nil?
 puts last_known_good_sha
 puts current_sha
 
