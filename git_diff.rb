@@ -25,6 +25,7 @@ def monitoring_tag_exist?
   end
   return false
 end
+
 logger = Logger.new(STDOUT)
 @g = Git.open(MASTER_DIRECTORY)
 current_sha = @g.log.first.objectish
@@ -50,6 +51,7 @@ if !offending_files.empty?
   exit(1)
 else
   @g.delete_tag(@monitoring_tag) if monitoring_tag_exist?
+
   @g.add_tag(@monitoring_tag)
   @g.describe(current_sha, { @monitoring_tag.to_sym => true})
 end

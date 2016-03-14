@@ -1,9 +1,11 @@
 require 'rubygems'
 require 'git'
-require 'Logger'
 
+BRANCH = "master"
 MASTER_DIRECTORY = ARGV[0]
 @monitoring_tag = ARGV[1]
+@approved_hash = ARGV[2]
+GIT_REPO = ARGV[3]
 
 def monitoring_tag_exist?
   for tag in @g.tags
@@ -14,9 +16,10 @@ def monitoring_tag_exist?
   return false
 end
 
-
 @g = Git.open(MASTER_DIRECTORY)
-current_sha = @g.log.first.objectish
+puts "yes before" if monitoring_tag_exist?
 @g.delete_tag(@monitoring_tag) if monitoring_tag_exist?
-@g.add_tag(@monitoring_tag)
-@g.describe(current_sha, { @monitoring_tag.to_sym => true })
+puts "yes after" if monitoring_tag_exist?
+@g.add_tag(@monitoring_tag, @approved_hash)
+@g.push("origin", "master", opts={:tags => true, :f => true})
+
