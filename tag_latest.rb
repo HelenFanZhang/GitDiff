@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'git'
 
-BRANCH = "master"
+@branch = "master"
+@remote = "origin"
 @master_directory = ARGV[0]
 @monitoring_tag = ARGV[1]
 @approved_hash = ARGV[2]
@@ -20,5 +21,6 @@ puts "yes before" if monitoring_tag_exist?
 @g.delete_tag(@monitoring_tag) if monitoring_tag_exist?
 puts "yes after" if monitoring_tag_exist?
 @g.add_tag(@monitoring_tag, @approved_hash)
-@g.push("origin", "master", opts={:tags => true, :f => true})
+@g.push(@remote, @branch, opts={:tags => true, :f => true})
+
 
