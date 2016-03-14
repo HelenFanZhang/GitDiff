@@ -2,10 +2,9 @@ require 'rubygems'
 require 'git'
 
 BRANCH = "master"
-MASTER_DIRECTORY = ARGV[0]
+@master_directory = ARGV[0]
 @monitoring_tag = ARGV[1]
 @approved_hash = ARGV[2]
-GIT_REPO = ARGV[3]
 
 def monitoring_tag_exist?
   for tag in @g.tags
@@ -16,7 +15,7 @@ def monitoring_tag_exist?
   return false
 end
 
-@g = Git.open(MASTER_DIRECTORY)
+@g = Git.open(@master_directory)
 puts "yes before" if monitoring_tag_exist?
 @g.delete_tag(@monitoring_tag) if monitoring_tag_exist?
 puts "yes after" if monitoring_tag_exist?
