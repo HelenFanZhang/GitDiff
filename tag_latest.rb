@@ -21,6 +21,7 @@ puts "yes before" if monitoring_tag_exist?
 @g.delete_tag(@monitoring_tag) if monitoring_tag_exist?
 puts "yes after" if monitoring_tag_exist?
 @g.add_tag(@monitoring_tag, @approved_hash)
+@g.gcommit(@monitoring_tag)
 @g.push(@remote, @branch, opts={:tags => true, :f => true})
 
 
